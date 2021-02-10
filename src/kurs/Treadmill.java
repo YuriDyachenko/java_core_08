@@ -1,26 +1,28 @@
 package kurs;
-
+/*
+класс БЕГОВАЯ ДОРОЖКА, реализует ПРЕПЯТСТВИЕ
+*/
 public class Treadmill implements Obstructive{
-    private final double length;
+    private final int length;
 
-    Treadmill(double length) {
+    Treadmill(int length) {
         this.length = length;
     }
 
     @Override
     public boolean overcome(Participle participle) {
-        String name = String.format("   беговая дорожка %.1f м", length);
+        String name = String.format("   беговая дорожка %dм", length);
         if (!(participle instanceof AbleToRun)) {
-            System.out.printf("%s: не умеет, переход к следующему препятствию\n", name);
+            System.out.printf("%s: не умеет, пропускает\n", name);
             return true;
         }
-        double runLimit = ((AbleToRun) participle).getRunLimit();
+        int runLimit = ((AbleToRun) participle).getRunLimit();
         if (length > runLimit) {
-            System.out.printf("%s: не добежал %.1f м\n", name,  length - runLimit);
+            System.out.printf("%s: не добежал %d м\n", name,  length - runLimit);
             System.out.println("      выбыл из соревнований");
             return false;
         }
-        System.out.printf("%s: пробежал\n", name);
+        ((AbleToRun) participle).run(name);
         return true;
     }
 }

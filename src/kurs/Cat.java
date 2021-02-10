@@ -1,11 +1,13 @@
 package kurs;
-
-public class Cat implements AbleToRun, AbleToJump {
+/*
+класс КОТ, реализует УЧАСТНИКА и ВОЗМОЖНОСТИ БЕГАТЬ и ПРЫГАТЬ
+*/
+public class Cat implements AbleToRun, AbleToJump, Participle {
     private final String name;
-    private final double runLimit;
-    private final double jumpLimit;
+    private final int runLimit;
+    private final int jumpLimit;
 
-    public Cat(String name, double runLimit, double jumpLimit) {
+    public Cat(String name, int runLimit, int jumpLimit) {
         this.name = name;
         this.runLimit = runLimit;
         this.jumpLimit = jumpLimit;
@@ -13,16 +15,26 @@ public class Cat implements AbleToRun, AbleToJump {
 
     @Override
     public String toString() {
-        return String.format("Кот %s: могу пробежать %.1f м, перепрыгнуть %.1f м", name, runLimit, jumpLimit);
+        return String.format("Кот %s: могу пробежать %dм, перепрыгнуть %dм", name, runLimit, jumpLimit);
     }
 
     @Override
-    public double getJumpLimit() {
+    public int getJumpLimit() {
         return jumpLimit;
     }
 
     @Override
-    public double getRunLimit() {
+    public void jump(String what) {
+        System.out.printf("%s: перепрыгнул\n", what);
+    }
+
+    @Override
+    public int getRunLimit() {
         return runLimit;
+    }
+
+    @Override
+    public void run(String what) {
+        System.out.printf("%s: пробежал\n", what);
     }
 }

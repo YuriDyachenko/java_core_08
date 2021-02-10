@@ -1,26 +1,28 @@
 package kurs;
-
+/*
+класс СТЕНА, реализует ПРЕПЯТСТВИЕ
+*/
 public class Wall implements Obstructive{
-    private final double height;
+    private final int height;
 
-    Wall(double height) {
+    Wall(int height) {
         this.height = height;
     }
 
     @Override
     public boolean overcome(Participle participle) {
-        String name = String.format("   стена %.1f м", height);
+        String name = String.format("   стена %dм", height);
         if (!(participle instanceof AbleToJump)) {
-            System.out.printf("%s: не умеет, переход к следующему препятствию\n", name);
+            System.out.printf("%s: не умеет, пропускает\n", name);
             return true;
         }
-        double jumpLimit = ((AbleToJump) participle).getJumpLimit();
+        int jumpLimit = ((AbleToJump) participle).getJumpLimit();
         if (height > jumpLimit) {
-            System.out.printf("%s: не допрыгнул %.1f м\n", name, height - jumpLimit);
+            System.out.printf("%s: не допрыгнул %d м\n", name, height - jumpLimit);
             System.out.println("      выбыл из соревнований");
             return false;
         }
-        System.out.printf("%s: перепрыгнул\n", name);
+        ((AbleToJump) participle).jump(name);
         return true;
     }
 }
